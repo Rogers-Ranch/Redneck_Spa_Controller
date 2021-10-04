@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="{{ temp_settings['freq'] }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>
+      Redneck Hot Tub Controller by Code-Defined.com
+    </title>
+  </head>
+  <body >
+     <h1>Redneck Hot Tub Controller</h1>
+     <p>https://Code-Defined.com<br \>
+     Version 1.0</p>
+     <p>Spa Temperature settings</p>
+     <p>Current Time: {{ dt_string }}<br \>
+     Turn Spa heater on when water temperature is <b>{{ minT }}</b>{% if temp_settings['scale'] == "F"%}&#8457;.{% else -%}&#8451;.{% endif %}<br />
+     {% if temp_settings['setPoint'] -%}
+     Set Point is active.<br />
+     Turn Spa heater off when water temperature reaches <b>{{ setPointT }}</b>{% if temp_settings['scale'] == "F"%}&#8457;.{% else -%}&#8451;.{% endif %}<br />
+     {% else -%}
+     Turn Spa heater off when water temperature reaches <b>{{ maxT }}</b>{% if temp_settings['scale'] == "F"%}&#8457;.{% else -%}&#8451;.{% endif %}<br />
+     {% endif %}
+     Checking the water temperature every <b>{{ temp_settings['freq'] }}</b> seconds.</p>
+     <p>Water temperature is <b>{{ currentT }}</b>{% if temp_settings['scale'] == "F"%}&#8457;.{% else -%}&#8451;.{% endif %}<br />
+     Spa Heater is <b>{{ temp_settings['heater_state'] }}</b>.</p>
+  </body>
+</html>
