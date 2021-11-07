@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+			<h1>Redneck Hot Tub Controller - Control Panel</h1>
+			<form action="/edit_protection" method="post" novalidate>
+			{{ form.hidden_tag() }}
+			<div align=center>
+				<table class="styled-table">
+					<thead>
+						<tr>
+							<td rowspan="1" colspan="2"><b>Settings</b></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{{ form.scale.label }}</td>
+							<td>{{ form.scale(size=1 )}}</td>
+						</tr>
+						<tr>
+							<td>{{ form.minT.label }}</td>
+							<td>{{ form.minT(size=3) }}</td>
+						</tr>
+						<tr>
+							<td>{{ form.maxT.label }}</td>
+							<td>{{ form.maxT(size=3) }}</td>
+						</tr>
+						<tr>
+							<td>{{ form.setPoint.label }}</td>
+							<td>{{ form.setPoint() }}</td>
+						</tr>
+						<tr>
+							<td>{{ form.setPointT.label }}</td>
+							<td>{{ form.setPointT(size=3) }}</td>
+						</tr>
+					</tbody>
+			</table>					
+			<p>{{ form.submit() }}</p>
+		</div>
+		</form>
+{% endblock %}

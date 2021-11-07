@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Redneck Hot Tub Controller</h1>
+     
+    <div class="clock"><b>{{ formdata['time_string'] }}</b></div>
+    <div class="air"><b>{{ formdata['airT'] }}{% if formdata['scale'] == "F" %}&#8457;{% else -%}&#8451;{% endif %}</b></div>
+    <div class="water clearfix"><b>{{ formdata['currentT'] }}{% if formdata['scale'] == "F" %}&#8457;{% else -%}&#8451;{% endif %}</b></div>
+    <div style="clear:both;"></div>
+    <div class="state">Spa Heater is <b>{{ formdata['state'] }}</b></div>
+
+{% endblock %}

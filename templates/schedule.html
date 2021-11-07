@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+			<h1>Redneck Hot Tub Controller - Schedule</h1>
+			<div style="margin-left:5em;">
+				<table class="styled-table">
+					<thead>
+						<tr>
+							<td colspan="5"><b>Schedule</b></td>
+						</tr>
+						<tr>
+							<td><b></b></td>
+							<td><b>Start</b></td>
+							<td><b>Stop</b></td>
+							<td><b>Temperature</b></td>
+							<td><b>Action</b></td>
+						</tr>
+					</thead>
+					<tbody>
+					{% for dictionary in formdata %}
+						<tr>
+							<td>{{ dictionary['startday'] }}</td>
+							<td>{{ dictionary['starthour'] }}:{{ dictionary['startminute'] }} {{ dictionary['startmeridiem'] }}</td>
+							<td>{{ dictionary['stophour'] }}:{{ dictionary['stopminute'] }}  {{ dictionary['stopmeridiem'] }}</td>
+							<td>{{ dictionary['temp'] }}{% if dictionary['scale'] == "F" %}&#8457;{% else -%}&#8451;{% endif %}</td>
+							<td><form action="{{ url_for('del_schedule') }}" method="post"><input type="hidden" id ="id" name="id" value="{{ dictionary['id'] }}"><input type="submit" name="delete" value="delete"></form></td>
+						</tr>
+                    {% endfor %}
+					</tbody>
+			</table>
+			<a href="/add_schedule">Add to Schedule</a>		    
+			</div>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+			<h1>Redneck Hot Tub Controller - New Schedule</h1>
+			<form action="/add_schedule" method="post">
+			{{ form.hidden_tag() }}
+			<div style="margin-left:5em;">
+				<table class="styled-table">
+					<thead>
+						<tr>
+							<td colspan="2"><b>Add Schedule</b></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{{ form.startday.label }} {{ form.startday() }}</td>
+							<td>Start Time: {{ form.starthour() }}:{{ form.startminute() }} {{ form.startmeridiem() }}</td>
+						</tr>
+						<tr>
+							<td>{{ form.temp.label }} {{ form.temp(size=3) }}{% if scale == "F" %} &#8457;{% else -%} &#8457;{% endif %}</td>
+							<td>Stop Time: {{ form.stophour() }}:{{ form.stopminute() }} {{ form.stopmeridiem() }}</td>
+						</tr>
+					</tbody>
+			</table>			    
+			<p>{{ form.submit() }}</p>
+			</div>
+
+			</form>
+{% endblock %}

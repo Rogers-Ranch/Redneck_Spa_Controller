@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+			<h1>Redneck Hot Tub Controller - Protection Settings</h1>
+			<div align=center>
+				<table class="styled-table">
+					<thead>
+						<tr>
+							<td rowspan="1" colspan="2"><b>Settings</b></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Temperature Scale:</td>
+							<td>{{ scale }}</td>
+						</tr>
+						<tr>
+							<td>Temperature to turn <b>on</b> the Hot Tub heater:</td>
+							<td>{{ minT }}</td>
+						</tr>
+						<tr>
+							<td>Temperature to turn <b>off</b> the Hot Tub heater:</td>
+							<td>{{ maxT }}</td>
+						</tr>
+						<tr>
+							<td>Override temperature settings:</td>
+							<td>{{ setPoint }}</td>
+						</tr>
+						<tr>
+							<td>Override temperature</td>
+							<td>{{ setPointT }}</td>
+						</tr>
+					</tbody>
+			</table>
+
+			<a href="/edit_protection">Edit Protection Settings</a>
+			</div>
+{% endblock %}

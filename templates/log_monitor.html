@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Redneck Hot Tub Controller - Log Monitor</h1>
+     
+    <p><b>Controller Logs</b></p>
+	<p><textarea rows="10" cols="120" readonly>{{ log }}</textarea></p>
+	<p>Controller service is <b>{{ status }}.</b></p>
+
+{% endblock %}

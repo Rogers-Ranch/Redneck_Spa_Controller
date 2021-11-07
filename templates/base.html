@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  {% if isindex %}
+  <meta http-equiv="refresh" content={{ formdata['freq'] }}>
+  {% endif %}
+  
+  <title>Reckneck Hot Tub Controller</title>
+  <meta name="description" content="A DIY Hot Tub Controller">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  
+  <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="/static/main.css">
+  <link rel="stylesheet" href="/static/controller.css">
+  <link rel="canonical" href="http://localhost/">
+  </head>
+    <body>
+			<div width="100">
+					<img src="{{url_for('static', filename='banner.jpeg')}}", align="left" title="Banner", style="max-width: 100%; height: auto;", align="left", title="Banner"//>
+				</div>
+			<nav id="main_nav">
+				<ul>
+					<li>
+						<a href="/">Home</a>
+					</li>
+					<li>
+					{% if sessionactive -%}
+					<li>
+						<a href="/Control">Control Panel</a>
+						<ul>
+							<li><a href="/protection">Spa Protection</a></li>
+							<li><a href="/schedule">Edit Schedule</a></li>
+							<li><a href="Restart">Restart</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="/Monitor">Monitor</a>
+						<ul>
+							<li><a href="/temp_monitor">Temperature</a></li>
+							<li><a href="/log_monitor">Logs</a></li>
+						</ul>
+					</li>
+					{% endif %}		
+					</li>		
+					<li>
+					    {% if sessionactive -%}
+						<a href="/Logout">Logout</a>
+						{% else -%}
+						<a href="/Login">Login</a>
+						{% endif %}
+					</li>
+					<li>
+						<a href="Help">Help</a>
+						<ul>
+							<li><a href="Help">Help</a></li>
+							<li><a href="About">About</a></li>
+						</ul>
+					</li>
+				</ul>					
+			</nav>
+			<section id="section">
+				<article id="article">
+					{% block content %}
+					{% endblock %}
+					<br />
+				</article>
+			</section>
+			<section id="section">
+				{% with messages = get_flashed_messages() %}
+					{% if messages %}
+					<ul class="flash">
+						{% for message in messages %}
+						<li>{{ message }}</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				{% endwith %}
+			</section>
+			<p><b>This application was built by <i>Code-Defined.com</i>, and shared under the 
+			<a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html">GNU General Public License.</a></b><br />
+			If issues are found, please be sure to create an issue using thefollowing link:<br />
+			<a id="Issues" href="https://github.com/Rogers-Ranch/Redneck_Spa_Controller/issues">
+			https://github.com/Rogers-Ranch/Redneck_Spa_Controller/issues</a></p>
+    </body>
+</html>
