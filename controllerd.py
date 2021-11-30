@@ -75,8 +75,8 @@ class Controller(Thread):
       response = requests.post('http://127.0.0.1/sensors', data=json_object)
       airT = int(current_data['airT'])
       currentT = int(current_data['currentT'])
-      response = requests.post('http://10.0.10.17:51828/?accessoryId=sensor1&value={}'.format(airT))
-      response = requests.post('http://10.0.10.17:51828/?accessoryId=sensor2&value={}'.format(currentT))
+      response = requests.post('http://hoobs:51828/?accessoryId=sensor1&value={}'.format(airT))
+      response = requests.post('http://hoobs:51828/?accessoryId=sensor2&value={}'.format(currentT))
 
 def get_settings():
   try:

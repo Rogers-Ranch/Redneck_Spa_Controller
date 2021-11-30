@@ -1,0 +1,10 @@
+[Unit]
+ Description=Redneck Hot Tub Controller daemon
+ After=multi-user.target
+
+ [Service]
+ Type=idle
+ ExecStart=/usr/bin/python3 /home/pi/SpaController/controllerd.py
+
+ [Install]
+ WantedBy=multi-user.target
