@@ -172,38 +172,44 @@ def heater(app_settings):
   current_data['airT'] = current_temps[0]
   current_data['currentT'] = current_temps[1]
   current_data['state'] = "Off"
+
+  # get the spa schedule
+  schedule = get_sched()
   
-  if float(current_data['currentT']) >= float(app_settings['maxT']):
-    current_data['state'] = "Off"
-    
   if app_settings['setPoint'] == "On":
     if float(current_data['currentT']) <= float(app_settings['setPointT']):
       current_data['state'] = "On"
+    if float(current_data['currentT']) >= float(app_settings['maxT']):
+      current_data['state'] = "Off"
   else:
-    schedule = get_sched()
-    for days in schedule:
-      starttime = "{}:{}:00 {}".format(days['starthour'],days['startminute'],days['startmeridiem'])
-      stoptime = "{}:{}:00 {}".format(days['stophour'],days['stopminute'],days['stopmeridiem'])
-      starthour = int(timeConversion(starttime).split(':')[0])
-      stophour = int(timeConversion(stoptime).split(':')[0])
-      nowepoch = datetime.datetime(year, month, day, nowhour, nowminute)
-      nowepoch = calendar.timegm(nowepoch.timetuple())
-      startepoch = datetime.datetime(year, month, day, starthour, int(days['startminute']))
-      startepoch = calendar.timegm(startepoch.timetuple())
-      stopepoch = datetime.datetime(year, month, day, stophour, int(days['stopminute']))
-      stopepoch = calendar.timegm(stopepoch.timetuple())
-      temp = float(int(days['temp']))
-      if today in days['startday']:
-        if days['scale'] == "F":
-          temp = '{:.2f}'.format(((temp) * 1.8) + 32)
-        else:
-          temp = '{:.2f}'.format(temp)
-      if int(startepoch) <= int(nowepoch) <= int(stopepoch):
+    if float(current_data['airT']) <= float(app_settings['minT']):
+      current_data['state'] = "On"
+    else:
+      current_data['state'] = "Off"   
+  
+  for days in schedule:
+    starttime = "{}:{}:00 {}".format(days['starthour'],days['startminute'],days['startmeridiem'])
+    stoptime = "{}:{}:00 {}".format(days['stophour'],days['stopminute'],days['stopmeridiem'])
+    starthour = int(timeConversion(starttime).split(':')[0])
+    stophour = int(timeConversion(stoptime).split(':')[0])
+    nowepoch = datetime.datetime(year, month, day, nowhour, nowminute)
+    nowepoch = calendar.timegm(nowepoch.timetuple())
+    startepoch = datetime.datetime(year, month, day, starthour, int(days['startminute']))
+    startepoch = calendar.timegm(startepoch.timetuple())
+    stopepoch = datetime.datetime(year, month, day, stophour, int(days['stopminute']))
+    stopepoch = calendar.timegm(stopepoch.timetuple())
+    temp = float(int(days['temp']))
+    if today in days['startday']:
+      if days['scale'] == "F":
+        temp = '{:.2f}'.format(((temp) * 1.8) + 32)
+      else:
+        temp = '{:.2f}'.format(temp)
+    
+    if int(startepoch) <= int(nowepoch) <= int(stopepoch):
+      if float(current_data['currentT']) >= float(app_settings['maxT']):
+        current_data['state'] = "Off"
+      else:
         current_data['state'] = "On"
-  
-  if float(current_data['currentT']) <= float(app_settings['minT']):
-    current_data['state'] = "On"
-  
   return current_data
 
 def control(app_settings):
